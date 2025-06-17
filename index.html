@@ -519,28 +519,7 @@ window.addEventListener('scroll', () => {
   <div style="position: absolute; top: 75%; left: 50%; font-size: 2rem; color: rgba(255, 255, 255, 0.1); text-shadow: 0 0 8px rgba(168, 85, 247, 0.1); animation: floatFade 9s infinite ease-in-out;">✧</div>
   <div style="position: absolute; top: 25%; left: 80%; font-size: 2rem; color: rgba(255, 255, 255, 0.1); text-shadow: 0 0 8px rgba(168, 85, 247, 0.1); animation: floatFade 10s infinite ease-in-out;">☄</div>
 
-<!-- Music toggle -->
-<button id="music-toggle" style="position: fixed; bottom: 20px; right: 20px; z-index: 999; background: #9333ea; color: white; padding: 0.5rem 1rem; border-radius: 8px; border: none; font-weight: bold; cursor: pointer; box-shadow: 0 0 10px #a855f7;">🎵 Music</button>
-<audio id="bg-music" loop>
-  <source src="bgmusic.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
-<script>
-const nav = document.getElementById('floating-nav');
-const toggleBtn = document.getElementById('music-toggle');
-const bgMusic = document.getElementById('bg-music');
-let playing = false;
-toggleBtn.addEventListener('click', () => {
-  if (!playing) {
-    bgMusic.play();
-    toggleBtn.textContent = '🔊 Stop';
-  } else {
-    bgMusic.pause();
-    toggleBtn.textContent = '🎵 Music';
-  }
-  playing = !playing;
-});
-</script>
+
 <!-- Floating navbar on hover -->
 <div id="floating-nav" style="position: fixed; top: 0; left: 50%; transform: translateX(-50%); background: rgba(0, 0, 0, 0.3); padding: 0.5rem 1.5rem; border-radius: 0 0 12px 12px; backdrop-filter: blur(6px); color: #fff; z-index: 999; font-size: 0.9rem; opacity: 0; transition: opacity 0.3s; pointer-events: none;">
   <a href="#" style="margin: 0 1rem; text-decoration: none; color: white;"><i class='fa fa-house' style='margin-right: 6px;'></i>Home</a>
@@ -568,6 +547,8 @@ highlightNav();
 
 
 document.addEventListener('mousemove', e => {
+  const nav = document.getElementById('floating-nav');
+  if (!nav) return;
   if (e.clientY < 60) {
     nav.style.opacity = '1';
     nav.style.pointerEvents = 'auto';
