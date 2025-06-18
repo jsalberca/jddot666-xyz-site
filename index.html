@@ -318,6 +318,29 @@ footer.animate__fadeInUp {
     0%, 100% { opacity: 0.08; }
     50% { opacity: 0.15; }
   }  
+@keyframes flickerText {
+  0%, 100% { opacity: 1; text-shadow: 0 0 6px rgba(255,255,255,0.2); }
+  45% { opacity: 0.7; text-shadow: 0 0 12px rgba(255,255,255,0.35); }
+  55% { opacity: 0.85; text-shadow: 0 0 8px rgba(255,255,255,0.25); }
+  60% { opacity: 0.6; text-shadow: 0 0 10px rgba(255,255,255,0.15); }
+}
+#background-dots {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: dotsMove 80s linear infinite;
+}
+
+@keyframes dotsMove {
+  0% { background-position: 0 0; }
+  100% { background-position: 400px 400px; }
+}
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css">
 </head>
@@ -328,10 +351,11 @@ footer.animate__fadeInUp {
 <div id="aurora"></div>
 <div id="lux-overlay"></div>
 <div id="fog-shimmer"></div>
+<div id="background-dots"></div>
 
 <div class="container animate__animated animate__fadeInUp animate__slower animate__delay-1s">
   <h1 class="glow">@jddot666</h1>
-  <p class="subtext">Follow my socials</p>
+  <p class="subtext" style="font-size: 1.4rem; font-weight: 600; color: #fff; text-shadow: 0 0 6px rgba(255,255,255,0.2); margin-bottom: 0.5rem; animation: flickerText 2s infinite ease-in-out;">Follow my socials</p>
   <div class="social-icons">
     <a href="https://www.tiktok.com/@jddot666" target="_blank">
       <img src="https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/tiktok.svg" alt="TikTok">
@@ -515,5 +539,17 @@ function copyDiscord() {
   document.body.removeChild(temp);
 }
 </script>
-</body>
+
+
+<style>
+@keyframes shuttleFloat {
+  0% { transform: translateY(0) rotate(-5deg); opacity: 0.04; }
+  50% { transform: translateY(-10px) rotate(-4deg); opacity: 0.07; }
+  100% { transform: translateY(0) rotate(-5deg); opacity: 0.04; }
+}
+</style>
+
+$1
+
+
 </html>
