@@ -304,6 +304,12 @@ footer.animate__fadeInUp {
   100% { background-position: 100% 100%; }
 }
     @media (max-width: 480px) {
+  #view-counter {
+    top: 1rem;
+    right: 1rem;
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+  }
       h1 {
         font-size: 2.2rem;
         padding: 0 1rem;
@@ -392,6 +398,7 @@ footer.animate__fadeInUp {
 <div id="fog-shimmer"></div>
 <div id="background-dots"></div>
 
+
 <div class="container animate__animated animate__fadeInUp animate__slower animate__delay-1s">
   <h1 class="glow">@jddot666</h1>
   <p class="subtext" style="font-size: 1.4rem; font-weight: 600; color: #fff; text-shadow: 0 0 6px rgba(255,255,255,0.2); margin-bottom: 0.5rem; animation: flickerText 2s infinite ease-in-out;">Follow my socials</p>
@@ -420,8 +427,7 @@ footer.animate__fadeInUp {
     <p style="font-size: 1.5rem; font-weight: 600; color: var(--glow); text-shadow: 0 0 8px var(--glow-lite);">drip or drown.</p>
     <a href="https://getd.rip/dot" target="_blank">start dripping</a>
   </div>
-  <div id="view-counter">👁️ Loading views...</div>
-</div>
+  </div>
 <footer class="animate__animated animate__fadeInUp animate__slower animate__delay-4s">© jddot666 2016–2025. All rights reserved.</footer>
 <script>
   const canvas = document.getElementById('stars');
@@ -469,25 +475,7 @@ footer.animate__fadeInUp {
     canvas.height = window.innerHeight;
   });
 </script>
-<script>
-// View counter with animated counting (FIXED)
-fetch('https://api.countapi.xyz/hit/jddot666.xyz/profileviews')
-  .then(res => res.json())
-  .then(data => {
-    const target = data.value;
-    const el = document.getElementById('view-counter');
-    let count = 0;
-    const step = Math.ceil(target / 50);
-    const interval = setInterval(() => {
-      count += step;
-      if (count >= target) {
-        count = target;
-        clearInterval(interval);
-      }
-      el.innerHTML = `👁️ <span class="view-number">${count.toLocaleString()}</span> views`;
-    }, 40);
-  });
-</script>
+
 <script>
   const particleCanvas = document.getElementById('particles');
   const pctx = particleCanvas.getContext('2d');
