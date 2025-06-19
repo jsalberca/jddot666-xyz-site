@@ -7,6 +7,29 @@
   <title>@jddot666</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
+.view-number {
+  animation: flickerGlow 1.2s infinite ease-in-out;
+  text-shadow: 0 0 4px var(--glow), 0 0 8px var(--glow-lite);
+}
+@keyframes flickerGlow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.75; text-shadow: 0 0 10px var(--glow-lite); }
+}
+#view-counter {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  font-size: 1rem;
+  color: var(--glow-lite);
+  text-shadow: 0 0 6px var(--glow), 0 0 12px var(--glow-lite);
+  background: rgba(0, 0, 0, 0.25);
+  padding: 0.6rem 1.2rem;
+  border-radius: 1rem;
+  z-index: 999;
+  animation: fadeInUpGlow 1s ease, pulseGlow 2.5s infinite ease-in-out;
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+}
     :root {
       --glow: #d89aff;
       --glow-lite: #f5d3ff;
@@ -27,7 +50,7 @@
       color: white;
       min-height: 100vh;
       display: flex;
-      flex-direction: column;
+      flex-direction: column;r
       overflow-x: hidden;
       scroll-behavior: smooth;
     }
@@ -341,6 +364,22 @@ footer.animate__fadeInUp {
   0% { background-position: 0 0; }
   100% { background-position: 400px 400px; }
 }
+@keyframes fadeInUpGlow {
+  0% { opacity: 0; transform: translateY(-12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 8px var(--glow), 0 0 20px var(--glow-lite);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 16px var(--glow), 0 0 30px var(--glow-lite);
+    transform: scale(1.04);
+  }
+}
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css">
 </head>
@@ -381,6 +420,7 @@ footer.animate__fadeInUp {
     <p style="font-size: 1.5rem; font-weight: 600; color: var(--glow); text-shadow: 0 0 8px var(--glow-lite);">drip or drown.</p>
     <a href="https://getd.rip/dot" target="_blank">start dripping</a>
   </div>
+  <div id="view-counter">👁️ Loading views...</div>
 </div>
 <footer class="animate__animated animate__fadeInUp animate__slower animate__delay-4s">© jddot666 2016–2025. All rights reserved.</footer>
 <script>
@@ -427,6 +467,25 @@ footer.animate__fadeInUp {
   window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+  });
+</script>
+<script>
+// View counter with animated counting (FIXED)
+fetch('https://api.countapi.xyz/hit/jddot666.xyz/profileviews')
+  .then(res => res.json())
+  .then(data => {
+    const target = data.value;
+    const el = document.getElementById('view-counter');
+    let count = 0;
+    const step = Math.ceil(target / 50);
+    const interval = setInterval(() => {
+      count += step;
+      if (count >= target) {
+        count = target;
+        clearInterval(interval);
+      }
+      el.innerHTML = `👁️ <span class="view-number">${count.toLocaleString()}</span> views`;
+    }, 40);
   });
 </script>
 <script>
@@ -548,6 +607,37 @@ function copyDiscord() {
   100% { transform: translateY(0) rotate(-5deg); opacity: 0.04; }
 }
 </style>
+
+<script>
+  const base = "@";
+  const handle = "jddot666";
+  let i = handle.length;
+  let deleting = true;
+
+  function animateTabTitle() {
+    if (deleting) {
+      i--;
+      document.title = base + handle.slice(0, i);
+      if (i === 0) {
+        deleting = false;
+        setTimeout(animateTabTitle, 1500); // pause on @
+        return;
+      }
+    } else {
+      i++;
+      document.title = base + handle.slice(0, i);
+      if (i === handle.length) {
+        deleting = true;
+        setTimeout(animateTabTitle, 1500); // pause on full handle
+        return;
+      }
+    }
+    setTimeout(animateTabTitle, 350); // slow step timing
+  }
+
+  animateTabTitle();
+</script>
+
 
 
 
